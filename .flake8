@@ -1,0 +1,8 @@
+[flake8]
+ignore = E251, E501, W503, W504
+exclude =
+    build
+    dist
+per-file-ignores =
+    src/itaxotools/**/__init__.py: F401, F403
+    scripts/*.py: E202, E241
