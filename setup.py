@@ -1,8 +1,9 @@
 """A setuptools based setup module."""
 
 # Always prefer setuptools over distutils
-from setuptools import find_namespace_packages, setup
 from pathlib import Path
+
+from setuptools import find_namespace_packages, setup
 
 # Get the long description from the README file
 here = Path(__file__).parent.resolve()

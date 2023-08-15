@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 from collections import Counter
+from dataclasses import dataclass
 
 from itaxotools.haplostats.counters import TagCounters
 
@@ -112,5 +112,3 @@ def test_update_many_couples():
             ('B', 'C', Counter()),
         ],
     ).validate()
-
-

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 from collections import Counter
+from dataclasses import dataclass
 
 from itaxotools.haplostats.sets import TaggedDisjointSets
 
