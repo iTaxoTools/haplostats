@@ -1,12 +1,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from collections import Counter
 
 from itaxotools.haplostats.indexer import StringIndexer
 
 Input = list[tuple[str, int]]
-ReturnList = list[int]
 IndexList = list[tuple[int, str]]
 
 
