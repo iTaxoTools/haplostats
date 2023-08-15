@@ -5,3 +5,4 @@ exclude =
     dist
 per-file-ignores =
     src/itaxotools/**/__init__.py: F401, F403
+    scripts/*.py: E241

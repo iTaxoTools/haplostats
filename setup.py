@@ -25,6 +25,7 @@ setup(
     install_requires=[],
     extras_require={
         'dev': [
+            'pyyaml',
             'pytest',
             'autoflake',
             'flake8',
