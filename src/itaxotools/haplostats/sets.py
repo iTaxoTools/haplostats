@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections import Counter
+from itertools import combinations
 
 
 class TaggedDisjointSets:
@@ -46,7 +47,7 @@ class TaggedDisjointSets:
             self._counters[m][tag] += 1
             self._union(m, target)
 
-    def get_set_members(self) -> dict[int, list[int]]:
+    def get_set_members(self) -> list[list[int]]:
         sets: dict[int, list[int]] = {}
         for i in range(len(self._parents)):
             root = self._find(i)
@@ -57,8 +58,8 @@ class TaggedDisjointSets:
 
     def get_tags_for_members(self, members: iter[int]) -> Counter[str]:
         counter = Counter()
-        for i in members:
-            counter.update(self._counters[i])
+        for member in members:
+            counter.update(self._counters[member])
         return counter
 
     def get_tags_per_set(self) -> dict[int, Counter[str]]:
@@ -67,11 +68,26 @@ class TaggedDisjointSets:
             for set, members in enumerate(self.get_set_members())
         }
 
-    def get_sets_per_tag(self) -> dict[str, Counter[int]]:
+    def get_sets_per_tag(self, tags_per_set=None) -> dict[str, Counter[int]]:
+        tags_per_set = tags_per_set or self.get_tags_per_set()
         tag_counters: dict[str, Counter[int]] = {}
-        for set, tags in self.get_tags_per_set().items():
+        for set, tags in tags_per_set.items():
             for tag, count in tags.items():
                 if tag not in tag_counters:
                     tag_counters[tag] = Counter()
                 tag_counters[tag][set] = count
         return tag_counters
+
+    def get_sets_per_tag_pair(self, sets_per_tag=None, set_members=None) -> iter[tuple[str, str, Counter[int]]]:
+        sets_per_tag = sets_per_tag or self.get_sets_per_tag()
+        set_members = set_members or self.get_set_members()
+        for x, y in combinations(sets_per_tag.keys(), 2):
+            counter = sets_per_tag[x] & sets_per_tag[y]
+            for set in counter:
+                common_members = 0
+                for member in set_members[set]:
+                    member_tags = self._counters[member]
+                    if x in member_tags and y in member_tags:
+                        common_members += 1
+                counter[set] = common_members
+            yield x, y, counter

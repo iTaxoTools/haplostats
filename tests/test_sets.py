@@ -8,6 +8,7 @@ from itaxotools.haplostats.sets import TaggedDisjointSets
 Input = list[tuple[str, list[int]]]
 TagsPerSet = dict[int, Counter[str]]
 SetsPerTag = dict[str, Counter[int]]
+SetsPerTagPair = list[tuple[str, str, Counter[int]]]
 
 
 @dataclass
@@ -16,6 +17,7 @@ class SetTest:
     input: Input
     tags_per_set: TagsPerSet
     sets_per_tag: SetsPerTag
+    sets_per_tag_pair: SetsPerTagPair
 
     def validate(self):
         tdsets = TaggedDisjointSets(self.n)
@@ -23,9 +25,11 @@ class SetTest:
             tdsets.add(tag, members)
         tags_per_set = tdsets.get_tags_per_set()
         sets_per_tag = tdsets.get_sets_per_tag()
+        sets_per_tag_pair = list(tdsets.get_sets_per_tag_pair())
 
         assert tags_per_set == self.tags_per_set
         assert sets_per_tag == self.sets_per_tag
+        assert sets_per_tag_pair == self.sets_per_tag_pair
 
 
 def test_empty():
@@ -39,6 +43,7 @@ def test_empty():
             3: Counter(),
         },
         sets_per_tag = {},
+        sets_per_tag_pair = [],
     ).validate()
 
 
@@ -57,6 +62,9 @@ def test_disjoint():
             'A': Counter({0: 2}),
             'B': Counter({1: 2}),
         },
+        sets_per_tag_pair = [
+            ('A', 'B', Counter()),
+        ],
     ).validate()
 
 
@@ -74,6 +82,9 @@ def test_overlap():
             'A': Counter({0: 4}),
             'B': Counter({0: 4}),
         },
+        sets_per_tag_pair = [
+            ('A', 'B', Counter({0: 4})),
+        ],
     ).validate()
 
 
@@ -95,6 +106,9 @@ def test_repeated():
             'A': Counter({0: 4}),
             'B': Counter({1: 3}),
         },
+        sets_per_tag_pair = [
+            ('A', 'B', Counter()),
+        ],
     ).validate()
 
 
@@ -114,5 +128,9 @@ def test_chained():
             'B': Counter({0: 2}),
             'C': Counter({0: 2}),
         },
+        sets_per_tag_pair = [
+            ('A', 'B', Counter({0: 1})),
+            ('A', 'C', Counter({0: 0})),
+            ('B', 'C', Counter({0: 1})),
+        ],
     ).validate()
-
