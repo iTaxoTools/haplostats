@@ -7,11 +7,20 @@ from itertools import combinations
 class TaggedDisjointSets:
     """Disjoint-set data structure (Union-Find) with tag counters"""
 
-    def __init__(self, n: int):
+    def __init__(self, n: int = 0):
         self._parents: list[int] = list(range(n))
         self._ranks: list[int] = [0] * n
 
         self._counters: list[Counter[str]] = [Counter() for _ in range(n)]
+
+    def _extend(self, x: int) -> None:
+        diff = x - len(self._parents)
+        if diff < 0:
+            return
+
+        self._parents.extend(range(len(self._parents), x + 1))
+        self._ranks.extend([0] * (diff + 1))
+        self._counters.extend((Counter() for _ in range(diff + 1)))
 
     def _find(self, x: int) -> None:
         if self._parents[x] != x:
@@ -44,6 +53,7 @@ class TaggedDisjointSets:
         target = members[0]
 
         for m in members:
+            self._extend(m)
             self._counters[m][tag] += 1
             self._union(m, target)
 

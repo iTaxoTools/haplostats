@@ -32,6 +32,16 @@ class SetTest:
         assert sets_per_tag_pair == self.sets_per_tag_pair
 
 
+def test_zero():
+    SetTest(
+        n = 0,
+        input = [],
+        tags_per_set = {},
+        sets_per_tag = {},
+        sets_per_tag_pair = [],
+    ).validate()
+
+
 def test_empty():
     SetTest(
         n = 4,
@@ -132,5 +142,26 @@ def test_chained():
             ('A', 'B', Counter({0: 1})),
             ('A', 'C', Counter({0: 0})),
             ('B', 'C', Counter({0: 1})),
+        ],
+    ).validate()
+
+
+def test_extend():
+    SetTest(
+        n = 0,
+        input = [
+            ('A', [0]),
+            ('B', [1]),
+        ],
+        tags_per_set = {
+            0: Counter({'A': 1}),
+            1: Counter({'B': 1}),
+        },
+        sets_per_tag = {
+            'A': Counter({0: 1}),
+            'B': Counter({1: 1}),
+        },
+        sets_per_tag_pair = [
+            ('A', 'B', Counter()),
         ],
     ).validate()
