@@ -4,13 +4,13 @@ from collections import Counter
 
 
 class TaggedDisjointSets:
-    def __init__(self, n: int):
-        """Disjoint-set data structure (Union-Find) with tag counters"""
+    """Disjoint-set data structure (Union-Find) with tag counters"""
 
+    def __init__(self, n: int):
         self._parents: list[int] = list(range(n))
         self._ranks: list[int] = [0] * n
 
-        self._counters: list[Counter[str, int]] = [Counter() for _ in range(n)]
+        self._counters: list[Counter[str]] = [Counter() for _ in range(n)]
 
     def _find(self, x: int) -> None:
         if self._parents[x] != x:
@@ -55,20 +55,20 @@ class TaggedDisjointSets:
             sets[root].append(i)
         return list(sets.values())
 
-    def get_tags_for_members(self, members: iter[int]) -> Counter[str, int]:
+    def get_tags_for_members(self, members: iter[int]) -> Counter[str]:
         counter = Counter()
         for i in members:
             counter.update(self._counters[i])
         return counter
 
-    def get_tags_per_set(self) -> dict[int, Counter[str, int]]:
+    def get_tags_per_set(self) -> dict[int, Counter[str]]:
         return {
             set: self.get_tags_for_members(members)
             for set, members in enumerate(self.get_set_members())
         }
 
-    def get_sets_per_tag(self) -> dict[str, Counter[int, int]]:
-        tag_counters: dict[str, Counter[int, int]] = {}
+    def get_sets_per_tag(self) -> dict[str, Counter[int]]:
+        tag_counters: dict[str, Counter[int]] = {}
         for set, tags in self.get_tags_per_set().items():
             for tag, count in tags.items():
                 if tag not in tag_counters:
