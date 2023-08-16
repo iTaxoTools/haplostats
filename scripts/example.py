@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+
+"""
+Example that prints all stats in YAML. Run with:
+$ python example.py
+
+"""
+
 import yaml
 
 from itaxotools.haplostats import HaploStats
@@ -16,13 +24,15 @@ def yamlify(data, title: str = None) -> str:
     return yaml.dump(data, default_flow_style=False)
 
 
-def raw_input_generator():
-    yield ('specimen1', 'verrucosa',  'AAAAAAAAA', 'AAAAAAAAC')
-    yield ('specimen2', 'verrucosa',  'AAAAAAAAC', 'AAAAAAAAG')
-    yield ('specimen3', 'verrucosa',  'AAAAAAAAG', 'AAAAAAAAA')
-    yield ('specimen4', 'mysteriosa', 'CCCCCCCCC', 'CCCCCCCCC')
-    yield ('specimen5', 'mysteriosa', 'CCCCCCCCC', 'CCCCCCCCT')
-    yield ('specimen6', 'enigmatica', 'GGGGGGGGG', 'CCCCCCCCT')
+def example_input_generator():
+    return [
+        ('specimen1', 'verrucosa',  'AAAAAAAAA', 'AAAAAAAAC'),
+        ('specimen2', 'verrucosa',  'AAAAAAAAC', 'AAAAAAAAG'),
+        ('specimen3', 'verrucosa',  'AAAAAAAAG', 'AAAAAAAAA'),
+        ('specimen4', 'mysteriosa', 'CCCCCCCCC', 'CCCCCCCCC'),
+        ('specimen5', 'mysteriosa', 'CCCCCCCCC', 'CCCCCCCCT'),
+        ('specimen6', 'enigmatica', 'GGGGGGGGG', 'CCCCCCCCT'),
+    ]
 
 
 def extract_input_data(raw_input):
@@ -42,9 +52,12 @@ def format_input(raw_input):
 
 
 def main():
-    print()
+    """Print output in YAML format"""
 
-    data = format_input(raw_input_generator())
+    raw_input = example_input_generator()
+
+    print()
+    data = format_input(raw_input)
     print(yamlify(data, 'Input'))
     print()
 
@@ -55,7 +68,7 @@ def main():
         subsets = 'species',
     )
 
-    for species, sequences in extract_input_data(raw_input_generator()):
+    for species, sequences in extract_input_data(raw_input):
         stats.add(species, sequences)
 
     data = stats.get_haplotypes()
@@ -84,6 +97,10 @@ def main():
 
     data = stats.get_fields_of_recombination_shared_between_subsets()
     print(yamlify(data, 'FORs shared between species'))
+    print()
+
+    data = stats.get_dataset_sizes()
+    print(yamlify(data, 'Dataset size'))
     print()
 
 

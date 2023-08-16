@@ -29,3 +29,6 @@ class TagCounters:
         for x, y in combinations(tags, 2):
             counter = self._counters[x] & self._counters[y]
             yield x, y, counter
+
+    def __len__(self) -> int:
+        return len(self._counters)

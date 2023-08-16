@@ -15,6 +15,7 @@ class CounterTest:
     input: Input
     tag_list: TagList
     pair_list: PairList
+    length: int
 
     def validate(self):
         counters = TagCounters()
@@ -28,6 +29,7 @@ class CounterTest:
 
         assert tag_list == self.tag_list
         assert pair_list == self.pair_list
+        assert len(counters) == self.length
 
 
 def test_empty():
@@ -35,6 +37,7 @@ def test_empty():
         input = [],
         tag_list = [],
         pair_list = [],
+        length = 0,
     ).validate()
 
 
@@ -47,6 +50,7 @@ def test_add_single():
             ('A', Counter({0: 1})),
         ],
         pair_list = [],
+        length = 1,
     ).validate()
 
 
@@ -67,6 +71,7 @@ def test_add_many():
             ('A', 'C', Counter()),
             ('B', 'C', Counter()),
         ],
+        length = 3,
     ).validate()
 
 
@@ -79,6 +84,7 @@ def test_update_single():
             ('A', Counter({0: 1, 1: 1, 2: 1})),
         ],
         pair_list = [],
+        length = 1,
     ).validate()
 
 
@@ -91,6 +97,7 @@ def test_update_single_repeated():
             ('A', Counter({0: 2, 1: 1})),
         ],
         pair_list = [],
+        length = 1,
     ).validate()
 
 
@@ -111,4 +118,5 @@ def test_update_many_couples():
             ('A', 'C', Counter()),
             ('B', 'C', Counter()),
         ],
+        length = 3,
     ).validate()
