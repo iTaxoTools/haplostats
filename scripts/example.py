@@ -32,6 +32,7 @@ def example_input_generator():
         ('specimen4', 'mysteriosa', 'CCCCCCCCC', 'CCCCCCCCC'),
         ('specimen5', 'mysteriosa', 'CCCCCCCCC', 'CCCCCCCCT'),
         ('specimen6', 'enigmatica', 'GGGGGGGGG', 'CCCCCCCCT'),
+        ('specimen7', 'enigmatica', 'AAAAAAAAA', 'AAAAAAAAA'),
     ]
 
 
