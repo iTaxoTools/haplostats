@@ -120,6 +120,6 @@ class HaploStats:
     def get_dataset_sizes(self) -> dict[str, int]:
         return {
             'haplotypes': len(self.indexer),
-            'FORs': len(self.fors.get_set_members()),
             self._subsets: len(self.counters),
+            'FORs': len(self.fors.get_set_members()),
         }
