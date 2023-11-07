@@ -12,7 +12,7 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='haplostats',
-    version='0.0.1',
+    version='0.1.0',
     description='Find unique haplotypes, fields of recombination and subset sharing',
     long_description=long_description,
     long_description_content_type='text/markdown',
