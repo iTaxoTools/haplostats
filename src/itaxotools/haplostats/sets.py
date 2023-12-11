@@ -88,7 +88,9 @@ class TaggedDisjointSets:
                 tag_counters[tag][set] = count
         return tag_counters
 
-    def get_sets_per_tag_pair(self, sets_per_tag=None, set_members=None) -> iter[tuple[str, str, Counter[int]]]:
+    def get_sets_per_tag_pair(
+        self, sets_per_tag=None, set_members=None
+    ) -> iter[tuple[str, str, Counter[int]]]:
         sets_per_tag = sets_per_tag or self.get_sets_per_tag()
         set_members = set_members or self.get_set_members()
         for x, y in combinations(sets_per_tag.keys(), 2):

@@ -34,89 +34,89 @@ class CounterTest:
 
 def test_empty():
     CounterTest(
-        input = [],
-        tag_list = [],
-        pair_list = [],
-        length = 0,
+        input=[],
+        tag_list=[],
+        pair_list=[],
+        length=0,
     ).validate()
 
 
 def test_add_single():
     CounterTest(
-        input = [
-            ('A', [0]),
+        input=[
+            ("A", [0]),
         ],
-        tag_list = [
-            ('A', Counter({0: 1})),
+        tag_list=[
+            ("A", Counter({0: 1})),
         ],
-        pair_list = [],
-        length = 1,
+        pair_list=[],
+        length=1,
     ).validate()
 
 
 def test_add_many():
     CounterTest(
-        input = [
-            ('A', [0]),
-            ('B', [1]),
-            ('C', [2]),
+        input=[
+            ("A", [0]),
+            ("B", [1]),
+            ("C", [2]),
         ],
-        tag_list = [
-            ('A', Counter({0: 1})),
-            ('B', Counter({1: 1})),
-            ('C', Counter({2: 1})),
+        tag_list=[
+            ("A", Counter({0: 1})),
+            ("B", Counter({1: 1})),
+            ("C", Counter({2: 1})),
         ],
-        pair_list = [
-            ('A', 'B', Counter()),
-            ('A', 'C', Counter()),
-            ('B', 'C', Counter()),
+        pair_list=[
+            ("A", "B", Counter()),
+            ("A", "C", Counter()),
+            ("B", "C", Counter()),
         ],
-        length = 3,
+        length=3,
     ).validate()
 
 
 def test_update_single():
     CounterTest(
-        input = [
-            ('A', [0, 1, 2]),
+        input=[
+            ("A", [0, 1, 2]),
         ],
-        tag_list = [
-            ('A', Counter({0: 1, 1: 1, 2: 1})),
+        tag_list=[
+            ("A", Counter({0: 1, 1: 1, 2: 1})),
         ],
-        pair_list = [],
-        length = 1,
+        pair_list=[],
+        length=1,
     ).validate()
 
 
 def test_update_single_repeated():
     CounterTest(
-        input = [
-            ('A', [0, 0, 1]),
+        input=[
+            ("A", [0, 0, 1]),
         ],
-        tag_list = [
-            ('A', Counter({0: 2, 1: 1})),
+        tag_list=[
+            ("A", Counter({0: 2, 1: 1})),
         ],
-        pair_list = [],
-        length = 1,
+        pair_list=[],
+        length=1,
     ).validate()
 
 
 def test_update_many_couples():
     CounterTest(
-        input = [
-            ('A', [0, 1]),
-            ('B', [1, 2]),
-            ('C', [3, 4]),
+        input=[
+            ("A", [0, 1]),
+            ("B", [1, 2]),
+            ("C", [3, 4]),
         ],
-        tag_list = [
-            ('A', Counter({0: 1, 1: 1})),
-            ('B', Counter({1: 1, 2: 1})),
-            ('C', Counter({3: 1, 4: 1})),
+        tag_list=[
+            ("A", Counter({0: 1, 1: 1})),
+            ("B", Counter({1: 1, 2: 1})),
+            ("C", Counter({3: 1, 4: 1})),
         ],
-        pair_list = [
-            ('A', 'B', Counter({1: 1})),
-            ('A', 'C', Counter()),
-            ('B', 'C', Counter()),
+        pair_list=[
+            ("A", "B", Counter({1: 1})),
+            ("A", "C", Counter()),
+            ("B", "C", Counter()),
         ],
-        length = 3,
+        length=3,
     ).validate()
