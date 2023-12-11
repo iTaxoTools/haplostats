@@ -4,6 +4,7 @@
 Example that prints all stats in YAML. Run with:
 $ python example.py
 
+Requires pyyaml.
 """
 
 import yaml

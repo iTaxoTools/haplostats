@@ -1,19 +1,32 @@
-# Haplostats - Find unique haplotypes, fields of recombination and subset sharing
+# Haplostats
 
-Install using pip:
+[![PyPI - Version](https://img.shields.io/pypi/v/itaxotools-haplostats)](
+    https://pypi.org/project/itaxotools-haplostats)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/itaxotools-haplostats)](
+    https://pypi.org/project/itaxotools-haplostats)
+[![GitHub - Tests](https://img.shields.io/github/actions/workflow/status/iTaxoTools/haplostats/test.yml?label=tests)](
+    https://github.com/iTaxoTools/haplostats/actions/workflows/test.yml)
+
+Find unique haplotypes, fields of recombination and subset sharing.
+
+## Installation
+
+Haplostats is available on PyPI. You can install it through `pip`:
 
 ```
-pip install git+https://github.com/iTaxoTools/haplostats.git
+pip install itaxotools-haplostats
 ```
 
-In Python, import and instantiate HaploStats:
+## Usage
+
+In Python, import and instantiate `HaploStats`:
 
 ```
 from itaxotools.haplostats import HaploStats
 stats = HaploStats()
 ```
 
-Add your data one entry at a time. Each entry is represented by its subset tag, plus a list of associated sequences (eg. from different alleles of the same specimen):
+Add your data one entry at a time. Each entry is represented by its subset tag, plus a list of associated sequences. These are usually different alleles of the same specimen:
 
 ```
 # Two specimens of different species, with two alleles each.
@@ -35,4 +48,4 @@ common_haplotypes = stats.get_haplotypes_shared_between_subsets()
 common_fors = stats.get_fields_of_recombination_shared_between_subsets()
 ```
 
-For a more detailed look at the available methods, please have a look at the [example script](scripts/example.py).
+For a more detailed look at the available methods, please have a look at the [example script](https://github.com/iTaxoTools/haplostats/tree/main/scripts/example.py).
