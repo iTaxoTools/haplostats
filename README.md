@@ -7,7 +7,7 @@
 [![GitHub - Tests](https://img.shields.io/github/actions/workflow/status/iTaxoTools/haplostats/test.yml?label=tests)](
     https://github.com/iTaxoTools/haplostats/actions/workflows/test.yml)
 
-Find unique haplotypes, fields of recombination and subset sharing.
+Find unique haplotypes, fields for recombination and subset sharing.
 
 ## Installation
 
@@ -31,7 +31,7 @@ Add your data one entry at a time. Each entry is represented by its subset tag, 
 ```
 # Two specimens of different species, with two alleles each.
 # There are three haplotypes in total. There is a single field
-# of recombination (FOR), as the specimens are connected through
+# for recombination (FFR), as the specimens are connected through
 # a common sequence: 'ACT'.
 
 stats.add('mysteriosa', ['ACT', 'ACC'])
@@ -42,10 +42,10 @@ After adding all entries, you are ready to analyze the dataset:
 
 ```
 haplotypes = stats.get_haplotypes()
-fors = stats.get_fields_of_recombination()
+fors = stats.get_fields_for_recombination()
 
 common_haplotypes = stats.get_haplotypes_shared_between_subsets()
-common_fors = stats.get_fields_of_recombination_shared_between_subsets()
+common_fors = stats.get_fields_for_recombination_shared_between_subsets()
 ```
 
 For a more detailed look at the available methods, please have a look at the [example script](https://github.com/iTaxoTools/haplostats/tree/main/scripts/example.py).

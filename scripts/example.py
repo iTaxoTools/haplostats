@@ -81,20 +81,20 @@ def main():
     print(yamlify(data, "Haplotypes shared between species"))
     print()
 
-    data = stats.get_fields_of_recombination()
-    print(yamlify(data, "Fields of recombination"))
+    data = stats.get_fields_for_recombination()
+    print(yamlify(data, "Fields for recombination"))
     print()
 
-    data = stats.get_subsets_per_field_of_recombination()
-    print(yamlify(data, "Species count per FOR"))
+    data = stats.get_subsets_per_field_for_recombination()
+    print(yamlify(data, "Species count per FFR"))
     print()
 
-    data = stats.get_fields_of_recombination_per_subset()
-    print(yamlify(data, "FOR count per species"))
+    data = stats.get_fields_for_recombination_per_subset()
+    print(yamlify(data, "FFR count per species"))
     print()
 
-    data = stats.get_fields_of_recombination_shared_between_subsets()
-    print(yamlify(data, "FORs shared between species"))
+    data = stats.get_fields_for_recombination_shared_between_subsets()
+    print(yamlify(data, "FFRs shared between species"))
     print()
 
     data = stats.get_dataset_sizes()

@@ -87,17 +87,17 @@ def main():
         with timer("Haplotypes shared between species"):
             stats.get_haplotypes_shared_between_subsets()
 
-        with timer("Fields of recombination"):
-            stats.get_fields_of_recombination()
+        with timer("Fields for recombination"):
+            stats.get_fields_for_recombination()
 
-        with timer("Species count per FOR"):
-            stats.get_subsets_per_field_of_recombination()
+        with timer("Species count per FFR"):
+            stats.get_subsets_per_field_for_recombination()
 
-        with timer("FOR count per species"):
-            stats.get_fields_of_recombination_per_subset()
+        with timer("FFR count per species"):
+            stats.get_fields_for_recombination_per_subset()
 
-        with timer("FORs shared between species"):
-            stats.get_fields_of_recombination_shared_between_subsets()
+        with timer("FFRs shared between species"):
+            stats.get_fields_for_recombination_shared_between_subsets()
 
         with timer("Dataset size"):
             sizes = stats.get_dataset_sizes()

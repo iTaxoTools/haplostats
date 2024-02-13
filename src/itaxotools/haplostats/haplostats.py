@@ -40,7 +40,7 @@ class HaploStats:
         return "Hap" + str(id + 1).rjust(self.haplotype_digits, "0")
 
     def format_set_id(self, id: int) -> str:
-        return "FOR" + str(id + 1).rjust(self.set_digits, "0")
+        return "FFR" + str(id + 1).rjust(self.set_digits, "0")
 
     def get_haplotypes(self) -> dict[str, str]:
         return {self.format_haplotype_id(id): seq for id, seq in self.indexer.all()}
@@ -70,28 +70,28 @@ class HaploStats:
             if haplotypes or include_empty
         ]
 
-    def get_fields_of_recombination(self) -> dict[str, list[str]]:
+    def get_fields_for_recombination(self) -> dict[str, list[str]]:
         return {
             self.format_set_id(set): [self.format_haplotype_id(id) for id in haplotypes]
             for set, haplotypes in enumerate(self.fors.get_set_members())
         }
 
-    def get_subsets_per_field_of_recombination(self) -> dict[str, dict]:
+    def get_subsets_per_field_for_recombination(self) -> dict[str, dict]:
         return {
             self.format_set_id(set): {"total": tags.total(), self._subsets: dict(tags)}
             for set, tags in self.fors.get_tags_per_set().items()
         }
 
-    def get_fields_of_recombination_per_subset(self) -> dict[str, dict]:
+    def get_fields_for_recombination_per_subset(self) -> dict[str, dict]:
         return {
             tag: {
                 "total": sets.total(),
-                "FORs": {self.format_set_id(set): count for set, count in sets.items()},
+                "FFRs": {self.format_set_id(set): count for set, count in sets.items()},
             }
             for tag, sets in self.fors.get_sets_per_tag().items()
         }
 
-    def get_fields_of_recombination_shared_between_subsets(
+    def get_fields_for_recombination_shared_between_subsets(
         self, include_empty=False
     ) -> list[dict]:
         return [
@@ -110,5 +110,5 @@ class HaploStats:
         return {
             "haplotypes": len(self.indexer),
             self._subsets: len(self.counters),
-            "FORs": len(self.fors.get_set_members()),
+            "FFRs": len(self.fors.get_set_members()),
         }

@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "itaxotools-haplostats"
 dynamic = ["version"]
-description = "Find unique haplotypes, fields of recombination and subset sharing"
+description = "Find unique haplotypes, fields for recombination and subset sharing"
 readme = "README.md"
 requires-python = ">=3.10.2, <4"
 keywords = []
